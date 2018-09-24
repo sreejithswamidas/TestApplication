@@ -30,9 +30,10 @@ public class TransactionList {
     //Check a Time Stamp is within the limit of 60 seconds
     Boolean checkTimeStamp(long TimeStamp)
     {
+        if(TimeStamp>System.currentTimeMillis())
+            return Boolean.FALSE;
         long EndDate= System.currentTimeMillis();
         long StartDate= EndDate-(1*60*1000);
-        System.out.println(EndDate);
         if(TimeStamp<EndDate && TimeStamp>StartDate)
             return Boolean.TRUE;
         else
