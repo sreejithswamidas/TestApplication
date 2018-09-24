@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionList {
@@ -33,7 +34,7 @@ public class TransactionList {
         if(TimeStamp>System.currentTimeMillis())
             return Boolean.FALSE;
         long EndDate= System.currentTimeMillis();
-        long StartDate= EndDate-(1*60*1000);
+        long StartDate= EndDate-(60*1000);
         if(TimeStamp<EndDate && TimeStamp>StartDate)
             return Boolean.TRUE;
         else
@@ -46,6 +47,13 @@ public class TransactionList {
         number= Float.parseFloat(s);
         return  number;
     }
+   /* public StatisticsModel setStasticsModel(StatisticsModel statisticsModel){
+        transactions=transactions.stream().filter(t->checkTimeStamp(t.getTimestamp())).collect(Collectors.toList());
+        count=transactions.size();
+        total=transactions.stream().map(TransactionModel::getAmount).reduce(Float::sum);
+        average=total/count;
+        max=transactions.stream().map(TransactionModel::getAmount).re
+    }*/
     //Set statistics model values
     public StatisticsModel setStatisticsModel(StatisticsModel statisticsModel)
     {
