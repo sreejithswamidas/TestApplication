@@ -48,11 +48,6 @@ public class TransactionList {
         return  number;
     }
    public StatisticsModel setStatisticsModel(StatisticsModel statisticsModel){
-       count=0;
-       total=0;
-       average=0;
-       max=0;
-       min=100;
         transactions=transactions.stream().filter(t->checkTimeStamp(t.getTimestamp())).collect(Collectors.toList());
         if(!transactions.isEmpty()) {
             count = (int) transactions.stream().count();
@@ -60,11 +55,9 @@ public class TransactionList {
             average = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).average().getAsDouble();
             min = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).min().getAsDouble();
             max = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).max().getAsDouble();
-            statisticsModel.setMin(min);
         }
         //if no transaction i last 60 seconds
         else statisticsModel.setMin(0);
-        // set the attributes of statistics model object
         statisticsModel.setCount(count);
         statisticsModel.setTotal(setDecimalPoints(total));
         statisticsModel.setAverage(setDecimalPoints(average));
