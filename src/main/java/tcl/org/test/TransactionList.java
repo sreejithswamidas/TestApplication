@@ -75,7 +75,7 @@ public class TransactionList {
         statisticsModel.setTotal(setDecimalPoints(total));
         statisticsModel.setAverage(setDecimalPoints(average));
         statisticsModel.setMax(max);
-        //if no transaction i last 60 seconds
+        //If no transaction i last 60 seconds
         if(nocontent){
             statisticsModel.setMin(0);
         }
