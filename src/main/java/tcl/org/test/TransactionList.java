@@ -47,15 +47,26 @@ public class TransactionList {
         number= Float.parseFloat(s);
         return  number;
     }
-   /* public StatisticsModel setStasticsModel(StatisticsModel statisticsModel){
+   public StatisticsModel setStatisticsModel(StatisticsModel statisticsModel){
         transactions=transactions.stream().filter(t->checkTimeStamp(t.getTimestamp())).collect(Collectors.toList());
-        count=transactions.size();
-        total=transactions.stream().map(TransactionModel::getAmount).reduce(Float::sum);
-        average=total/count;
-        max=transactions.stream().map(TransactionModel::getAmount).re
-    }*/
+        if(!transactions.isEmpty()) {
+            count = (int) transactions.stream().count();
+            total = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).sum();
+            average = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).average().getAsDouble();
+            min = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).min().getAsDouble();
+            max = (float) transactions.stream().mapToDouble(TransactionModel::getAmount).max().getAsDouble();
+        }
+        //if no transaction i last 60 seconds
+        else statisticsModel.setMin(0);
+        statisticsModel.setCount(count);
+        statisticsModel.setTotal(setDecimalPoints(total));
+        statisticsModel.setAverage(setDecimalPoints(average));
+        statisticsModel.setMax(max);
+        return statisticsModel;
+
+        }
     //Set statistics model values
-    public StatisticsModel setStatisticsModel(StatisticsModel statisticsModel)
+    /*public StatisticsModel setStatisticsModel(StatisticsModel statisticsModel)
     {
         count=0;
         total=0;
@@ -87,6 +98,10 @@ public class TransactionList {
         }
         else
         statisticsModel.setMin(min);
+        set();
         return statisticsModel;
     }
-}
+*/
+   }
+
+
