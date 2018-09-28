@@ -14,6 +14,7 @@ public class TransactionController {
         transactionBL=new TransactionBL();
     }
 
+    @CrossOrigin("*")
     @PostMapping(value = "/transact",consumes = "application/json",produces = "application/json")
    public  ResponseEntity<Object> transact(@RequestBody TransactionModel transaction){
 
